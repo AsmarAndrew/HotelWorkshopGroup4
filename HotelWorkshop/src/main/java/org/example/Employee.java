@@ -1,23 +1,18 @@
 package org.example;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class Employee {
+
     private int employeeID;
-
     private String name;
-
     private String department;
-
     private double payRate;
-
     private double hoursWorked;
-
     private LocalDateTime punchInTime;
-
     private LocalDateTime punchOutTime;
-
-    private double totalHoursWorked;
 
     public Employee(int employeeID, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeID;
@@ -67,6 +62,22 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
+    public LocalDateTime getPunchInTime() {
+        return punchInTime;
+    }
+
+    public void setPunchInTime(LocalDateTime punchInTime) {
+        this.punchInTime = punchInTime;
+    }
+
+    public LocalDateTime getPunchOutTime() {
+        return punchOutTime;
+    }
+
+    public void setPunchOutTime(LocalDateTime punchOutTime) {
+        this.punchOutTime = punchOutTime;
+    }
+
     public double getRegularHours(){
         double standardWeekHours = 40;
         if (hoursWorked <= standardWeekHours){
@@ -90,27 +101,23 @@ public class Employee {
         double overTimePay = getOvertimeHours() * (payRate * 1.5);
         return regularPay + overTimePay;
     }
-    public void punchTimeCard(){
-        if (punchInTime == null){
-            punchIn();
-        }else if (punchOutTime == null)
-            punchOut();
+
+    public void punchTimeCard(boolean punchIn){
+        if(punchIn){
+            punchInTime = LocalDateTime.now();
+        }else {
+            punchInTime = LocalDateTime.now();
+            calculateHoursWorked();
+        }
     }
-    public void punchIn(){
-        punchInTime = LocalDateTime.now();
-        System.out.println("Punched in at: " + punchInTime);
-    }
-    public void punchOut(){
-        punchOutTime = LocalDateTime.now();
-        System.out.println("Punched out at: " + punchOutTime);
-        calculateHoursWorked();
-    }
+
     private void calculateHoursWorked(){
-        double minutesWorked = java.time.Duration.between(punchInTime,punchOutTime).toMinutes();
-        totalHoursWorked += minutesWorked /60.0;
-
-        punchInTime = null;
-        punchOutTime = null;
+        Duration duration = Duration.between(punchInTime, punchOutTime);
+        double hours = (double)duration.toHours();
+        double min = (double) duration.toMinutes() / 60;
+        double total = hours + min;
+        if (punchOutTime != null && punchInTime != null){
+            hoursWorked += total;
+        }
     }
-
 }
