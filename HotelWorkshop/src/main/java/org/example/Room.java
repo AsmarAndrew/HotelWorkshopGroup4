@@ -2,10 +2,16 @@ package org.example;
 
 public class Room {
     public int numberOfBeds;
-    public float price;
+    public double price;
     public boolean occupied;
     public boolean dirty;
-    public boolean available;
+
+    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
+        this.numberOfBeds = numberOfBeds;
+        this.price = price;
+        this.occupied = occupied;
+        this.dirty = dirty;
+    }
 
     public int getNumberOfBeds() {
         return numberOfBeds;
@@ -15,7 +21,7 @@ public class Room {
         this.numberOfBeds = numberOfBeds;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
