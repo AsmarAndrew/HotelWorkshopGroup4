@@ -58,4 +58,37 @@ public class Room {
         this.available = available;
     }
 
+
+    public boolean checkIn() {
+        if(!occupied && !dirty) {
+            occupied = true;
+            dirty = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public boolean checkOut() {
+        if (occupied) {
+            occupied = false;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean cleanRoom() {
+        if (dirty) {
+            dirty = false;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
