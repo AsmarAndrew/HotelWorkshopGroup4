@@ -1,13 +1,23 @@
 package org.example;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Employee {
     private int employeeID;
+
     private String name;
+
     private String department;
+
     private double payRate;
+
     private double hoursWorked;
+
+    private LocalDateTime punchInTime;
+
+    private LocalDateTime punchOutTime;
+
+    private double totalHoursWorked;
 
     public Employee(int employeeID, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeID;
@@ -80,4 +90,27 @@ public class Employee {
         double overTimePay = getOvertimeHours() * (payRate * 1.5);
         return regularPay + overTimePay;
     }
+    public void punchTimeCard(){
+        if (punchInTime == null){
+            punchIn();
+        }else if (punchOutTime == null)
+            punchOut();
+    }
+    public void punchIn(){
+        punchInTime = LocalDateTime.now();
+        System.out.println("Punched in at: " + punchInTime);
+    }
+    public void punchOut(){
+        punchOutTime = LocalDateTime.now();
+        System.out.println("Punched out at: " + punchOutTime);
+        calculateHoursWorked();
+    }
+    private void calculateHoursWorked(){
+        double minutesWorked = java.time.Duration.between(punchInTime,punchOutTime).toMinutes();
+        totalHoursWorked += minutesWorked /60.0;
+
+        punchInTime = null;
+        punchOutTime = null;
+    }
+
 }
