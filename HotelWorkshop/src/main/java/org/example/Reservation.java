@@ -1,21 +1,16 @@
 package org.example;
 
-import java.util.List;
-
 public class Reservation {
+
     private String roomType;
-    private int price;
-    private int numberOfNights;
-    private boolean isWeekend;
-    //private List<String> room;
+    private double numberOfNights;
+    private double price;
+    private boolean IsWeekend;
 
-    //constructors
-
-    public Reservation(String roomType, int numberOfNights, boolean isWeekend) {
+    public Reservation(String roomType, double numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
         this.numberOfNights = numberOfNights;
-        this.isWeekend = isWeekend;
-        //calculatePrice();
+        IsWeekend = isWeekend;
     }
 
     public String getRoomType() {
@@ -26,42 +21,41 @@ public class Reservation {
         this.roomType = roomType;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getNumberOfNights() {
+    public double getNumberOfNights() {
         return numberOfNights;
     }
 
-    public void setNumberOfNights(int numberOfNights) {
+    public void setNumberOfNights(double numberOfNights) {
         this.numberOfNights = numberOfNights;
     }
 
+    public double getPrice() {
+        if (roomType.equalsIgnoreCase("king")){
+            price = 139;
+        }
+        if (roomType.equalsIgnoreCase("double")){
+            price = 124;
+        }
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public boolean isWeekend() {
-        return isWeekend;
+        return IsWeekend;
     }
 
     public void setWeekend(boolean weekend) {
-        isWeekend = weekend;
-    }
-//derived
-    public int getReservationTotal() {
-        return price * numberOfNights;
-    }
-    //calculate price based on room type and weekend
-    private void calculatePrice() {
-        if(roomType.equalsIgnoreCase("king")) {
-            price = isWeekend ? 139 * 110 / 100 : 139;
-        }
-        else if (roomType.equalsIgnoreCase("double")){
-            price = isWeekend ? 124 * 110 / 100 : 124;
-        }
+        IsWeekend = weekend;
     }
 
-
+    public double getReservationTotal(){
+        double roomPrice = getPrice();
+        if (isWeekend()){
+            return ((roomPrice*1.1)*numberOfNights);
+        }
+        return (roomPrice*numberOfNights);
+    }
 }
