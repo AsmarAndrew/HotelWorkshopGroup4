@@ -8,15 +8,13 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
-    private List<String> employees;
 
-    public Employee(int employeeID, String name, String department, double payRate, double hoursWorked, List<String> employees) {
+    public Employee(int employeeID, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeID;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
-        this.employees = employees;
     }
 
     public int getEmployeeID() {
