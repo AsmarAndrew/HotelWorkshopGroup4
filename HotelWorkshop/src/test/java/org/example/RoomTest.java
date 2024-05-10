@@ -33,6 +33,59 @@ class RoomTest {
         assertTrue(result);
     }
 
+    @Test
+    public void IfCheckIn_ReturnTrue(){
+        Room room = new Room(2,3.1,false,false);
+
+        var result = room.checkIn();
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void IfCheckIn_ButDirty_ReturnFalse(){
+        Room room = new Room(2,3.1,false,true);
+
+        var result = room.checkIn();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void IfCheckIn_ButOccupy_ReturnFalse(){
+        Room room = new Room(2,3.1,true,false);
+
+        var result = room.checkIn();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void IfCheckOut_ButOccupied_ReturnTrue(){
+        Room room = new Room(2,3.1,true,true);
+
+        var result = room.checkOut();
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void IfCleanRoom_ButDirty_ReturnTrue(){
+        Room room = new Room(2,3.1,true,true);
+
+        var result = room.checkOut();
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void IfCheckIn_ButNonOccupy_ReturnTrue(){
+        Room room = new Room(2,3.1,false,false);
+
+        var result = room.checkIn();
+
+        assertTrue(result);
+    }
 
 
 }

@@ -52,19 +52,6 @@ public class Room {
         return false;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public Room(int numberOfBeds, float price, boolean occupied, boolean dirty, boolean available) {
-        this.numberOfBeds = numberOfBeds;
-        this.price = price;
-        this.occupied = occupied;
-        this.dirty = dirty;
-        this.available = available;
-    }
-
-
     public boolean checkIn() {
         if(!occupied && !dirty) {
             occupied = true;
